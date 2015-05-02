@@ -19,3 +19,12 @@ Thumbs.db
 # target #
 ######################
 target/
+
+# properties #
+######################
+local.properties
+
+# build #
+######################
+SlidingMenu/app/build/
+SlidingMenu/build
