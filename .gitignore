@@ -30,3 +30,8 @@ app.iml
 ######################
 SlidingMenu/app/build/
 SlidingMenu/build
+*.lock
+
+*.bin
+
+SlidingMenu/.idea/workspace.xml
