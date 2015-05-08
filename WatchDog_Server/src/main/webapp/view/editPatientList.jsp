@@ -1,5 +1,6 @@
 <%@ taglib prefix="s" uri="/struts-tags"%> 
 <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<jsp:include page="loginCheck.jsp" />
 <html>
 <head>
     <title>WatchDog Server Demo</title>

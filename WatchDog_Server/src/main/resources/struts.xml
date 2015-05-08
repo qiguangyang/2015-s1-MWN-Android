@@ -15,10 +15,24 @@
 	<constant name="struts.enable.SlashesInActionNames" value="true" />
 
 	<!-- Normal Action mappings are defined here -->
-	<package name="default" namespace="" extends="struts-default, json-default">
+	<package name="default" namespace=""
+		extends="struts-default, json-default">
 		<!-- Two things to Notice: 1) class is set to 'editPatientAction' which 
 			is bean defined by Spring context 2) We have given the method to be called 
 			here as well; -->
+		<action name="login" class="com.watchdog.utils.LoginAction">
+			<result name="success" type="redirect">/list</result>
+			<result name="error" type="redirect">/login.jsp</result>
+		</action>
+
+		<action name="logout2" class="com.watchdog.utils.LoginAction" method="logout">
+			<result name="success" type="redirect">/login.jsp</result>
+		</action>
+
+		<action name="logout" class="com.watchdog.utils.LogoutAction">
+			<result name="success" type="redirect">/login.jsp</result>
+		</action>
+
 		<action name="list" class="editPatientAction" method="listPatients">
 			<result>/view/editPatientList.jsp</result>
 		</action>
@@ -29,7 +43,12 @@
 			<param name="patient.id">{1}</param>
 			<result type="redirect">/list</result>
 		</action>
-		<action name="getAllPatients" class="com.watchdog.mobile.JsonDataAction" method="getAllPatients">
+		<action name="getAllPatients" class="com.watchdog.mobile.JsonDataAction"
+			method="getAllPatients">
+			<result type="json" />
+		</action>
+		<action name="getAllTasks" class="com.watchdog.mobile.EmerTaskJsonAction"
+			method="getAllTasks">
 			<result type="json" />
 		</action>
 	</package>

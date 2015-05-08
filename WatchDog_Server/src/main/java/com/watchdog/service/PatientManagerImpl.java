@@ -24,6 +24,14 @@ public class PatientManagerImpl implements PatientManager {
 	public List<PatientEntity> getAllPatients() {
 		return patientDAO.getAllPatients();
 	}
+	
+	//This method return the specific patient in database
+		@Override
+		@Transactional
+    public PatientEntity getPatientById(Integer patientId) {
+    	return patientDAO.getPatientById(patientId);
+    }
+	
 	//Deletes a patient by it's id
 	@Override
 	@Transactional

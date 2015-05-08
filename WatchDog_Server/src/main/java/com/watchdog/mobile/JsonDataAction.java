@@ -41,7 +41,7 @@ public class JsonDataAction extends ActionSupport implements
 	public void setPatientManager(PatientManager patientManager) {
 		this.patientManager = patientManager;
 	}
-
+	
 	public void getAllPatients() {
 		JSONArray jsonArray = new JSONArray();
 		List<PatientEntity> pList = patientManager.getAllPatients();

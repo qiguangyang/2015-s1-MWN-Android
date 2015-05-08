@@ -9,6 +9,8 @@ public interface PatientManager {
     public void addPatient(PatientEntity patient);
     //This method return list of patients in database
     public List<PatientEntity> getAllPatients();
+    //Get patient info by id
+    public PatientEntity getPatientById(Integer patientId);
     //Deletes a patient by it's id
     public void deletePatient(Integer patientId);
 }

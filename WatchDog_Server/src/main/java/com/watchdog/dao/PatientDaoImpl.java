@@ -14,13 +14,16 @@ public class PatientDaoImpl implements PatientDAO
 	//Session factory injected by spring context
     private SessionFactory sessionFactory;
 	
-    //This method will be called when a patient object is added
 	@Override
 	public void addPatient(PatientEntity patient) {
 		this.sessionFactory.getCurrentSession().save(patient);
 	}
 
-	//This method return list of patients in database
+	//This setter will be used by Spring context to inject the sessionFactory instance
+	public void setSessionFactory(SessionFactory sessionFactory) {
+		this.sessionFactory = sessionFactory;
+	}
+
 	@SuppressWarnings("unchecked")
 	@Override
 	public List<PatientEntity> getAllPatients() {
@@ -29,7 +32,7 @@ public class PatientDaoImpl implements PatientDAO
 	
 	@SuppressWarnings("unchecked")
 	@Override
-    public List<PatientEntity> getPatient(String name) {
+    public List<PatientEntity> getPatientByName(String name) {
 		StringBuilder hql = new StringBuilder();
 		hql.append("from PatientEntity P where P.firstname = " + name);
 		hql.append(" or p.lastname = " + name);
@@ -37,8 +40,16 @@ public class PatientDaoImpl implements PatientDAO
 		List<PatientEntity> result = query.list();
     	return result;
     }
+	
+	@Override
+    public PatientEntity getPatientById(Integer id) {
+		StringBuilder hql = new StringBuilder();
+		hql.append("from PatientEntity P where P.id = " + id);
+		Query query = this.sessionFactory.getCurrentSession().createQuery(hql.toString());
+		PatientEntity result = (PatientEntity) query.list().get(0);
+    	return result;
+    }
 
-	//Deletes a patient by it's id
 	@Override
 	public void deletePatient(Integer patientId) {
 		PatientEntity patient = (PatientEntity) sessionFactory.getCurrentSession()
@@ -46,10 +57,5 @@ public class PatientDaoImpl implements PatientDAO
         if (null != patient) {
         	this.sessionFactory.getCurrentSession().delete(patient);
         }
-	}
-
-	//This setter will be used by Spring context to inject the sessionFactory instance
-	public void setSessionFactory(SessionFactory sessionFactory) {
-		this.sessionFactory = sessionFactory;
 	}
 }

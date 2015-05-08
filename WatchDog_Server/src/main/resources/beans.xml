@@ -18,6 +18,7 @@
     
     <!-- This bean has been referred fron struts.xml file; So type it correctly; -->
     <!-- Make scope prototype; This is really important. -->
+    
     <bean name="editPatientAction" class="com.watchdog.controller.EditPatientAction" scope="prototype">
 	     <property name="patientManager">
 	        <ref bean="patientManager"/>
@@ -31,6 +32,14 @@
     
     <bean id="patientManager" class="com.watchdog.service.PatientManagerImpl">
         <property name="patientDAO" ref="patientDAO"/>
+    </bean>
+    
+    <bean id="emerTaskDAO" class="com.watchdog.dao.EmerTaskDAOImpl">
+        <property name="sessionFactory" ref="sessionFactory"/>
+    </bean>
+    
+    <bean id="emerTaskManager" class="com.watchdog.service.EmerTaskManagerImpl">
+        <property name="emerTaskDAO" ref="emerTaskDAO"/>
     </bean>
     
     <!-- Configure jdbc.properties -->
