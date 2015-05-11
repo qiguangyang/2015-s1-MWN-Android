@@ -31,6 +31,10 @@ public class EmerTaskJsonAction extends ActionSupport implements
 	private HttpServletRequest request;
 	private HttpServletResponse response;
 
+	private int caregiverId;
+	private int taskId;
+	private String status;
+	
 	@Override
 	public void setServletResponse(HttpServletResponse response) {
 		this.response = response;
@@ -49,6 +53,18 @@ public class EmerTaskJsonAction extends ActionSupport implements
 		this.patientManager = patientManager;
 	}
 	
+	public void setCareGiverId(Integer id) {
+		this.caregiverId = id;
+	}
+	
+	public void setTaskId(Integer id) {
+		this.taskId = id;
+	}
+	
+	public void setStatus(String status) {
+		this.status = status;
+	}
+	
 	public void getAllTasks() {
 		List<EmerTaskEntity> etList = emerTaskManager.getAllTasks();
 
@@ -61,13 +77,27 @@ public class EmerTaskJsonAction extends ActionSupport implements
 		}
 	}
 	
-	public void getRelatedTasks(Integer caregiverId) {
+	public void getRelatedTasks() {
 		List<EmerTaskEntity> etList = emerTaskManager.getRelatedTasks(caregiverId);
 		
 		JSONArray jsonArray = getJsonArray(etList);
 		try {
 			this.response.setCharacterEncoding("UTF-8");
 			this.response.getWriter().write(jsonArray.toString());
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+	}
+	
+	public void updateTaskStatus() {
+		String result = emerTaskManager.updateTaskStatus(taskId, status) ? "SUCCESS" : "FAILURE";
+		
+		JSONObject jo = new JSONObject();
+		jo.put("updateResult", result);
+		
+		try {
+			this.response.setCharacterEncoding("UTF-8");
+			this.response.getWriter().write(jo.toString());
 		} catch (IOException e) {
 			e.printStackTrace();
 		}

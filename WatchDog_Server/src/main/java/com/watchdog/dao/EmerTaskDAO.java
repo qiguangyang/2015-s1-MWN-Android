@@ -12,5 +12,5 @@ public interface EmerTaskDAO {
     //This method return list of patients in database
     public List<EmerTaskEntity> getAllTasks();
     //Deletes a patient by it's id
-    public void updateStatus(Integer patientId, String status);
+    public boolean updateStatus(Integer taskId, String status);
 }

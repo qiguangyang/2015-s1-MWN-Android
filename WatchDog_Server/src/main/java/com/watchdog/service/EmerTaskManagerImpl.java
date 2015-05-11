@@ -38,8 +38,7 @@ public class EmerTaskManagerImpl implements EmerTaskManager {
 	@Override
 	@Transactional
 	public boolean updateTaskStatus(int taskId, String status) {
-		// TODO Auto-generated method stub
-		return true;
+		return emerTaskDAO.updateStatus(taskId, status);
 	}
 
 }

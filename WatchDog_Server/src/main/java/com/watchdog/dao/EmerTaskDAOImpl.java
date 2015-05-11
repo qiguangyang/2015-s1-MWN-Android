@@ -1,5 +1,6 @@
 package com.watchdog.dao;
 
+import java.util.Date;
 import java.util.List;
 
 import org.hibernate.Query;
@@ -27,7 +28,7 @@ public class EmerTaskDAOImpl implements EmerTaskDAO {
 	@Override
 	public List<EmerTaskEntity> getTaskByUserID(int userId) {
 		StringBuilder hql = new StringBuilder();
-		hql.append("from EmerTaskEntity P where P.userid = " + userId);
+		hql.append("from EmerTaskEntity P where P.relatedCareGiverId = " + userId);
 		Query query = this.sessionFactory.getCurrentSession().createQuery(hql.toString());
 		List<EmerTaskEntity> result = query.list();
     	return result;
@@ -40,9 +41,23 @@ public class EmerTaskDAOImpl implements EmerTaskDAO {
 	}
 
 	@Override
-	public void updateStatus(Integer patientId, String status) {
-		// TODO Auto-generated method stub
-
+	public boolean updateStatus(Integer taskId, String status) {
+		String hql = "UPDATE EmerTaskEntity set status = :status, endtime = :endtime " + 
+	             "WHERE id = :taskid";
+		Query query = this.sessionFactory.getCurrentSession().createQuery(hql);
+		query.setParameter("status", status);
+		query.setParameter("endtime", new Date());
+		query.setParameter("taskid", taskId);
+		try {
+			int result = query.executeUpdate();
+			if (result == 1) {
+				return true;
+			} else {
+				return false;
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+			return false;
+		}
 	}
-
 }
