@@ -32,6 +32,22 @@ SlidingMenu/app/build/
 SlidingMenu/build
 *.lock
 
-*.bin
+#built application files
+*.apk
+*.ap_
 
+# files for the dex VM
+*.dex
+
+# generated files
+SlidingMenu/bin/
+SlidingMenu/gen/
+
+# Windows thumbnail db
+Thumbs.db
+
+# Android Studio
+*.iml
+.idea
 SlidingMenu/.idea/workspace.xml
+.gradle
