@@ -5,12 +5,14 @@ import java.util.List;
 import com.watchdog.entity.EmerTaskEntity;
 
 public interface EmerTaskDAO {
-	//This method will be called when a patient object is added
-    public void addTask(EmerTaskEntity task);
-    //Get patients by name
-    public List<EmerTaskEntity> getTaskByUserID(int userId);
-    //This method return list of patients in database
-    public List<EmerTaskEntity> getAllTasks();
-    //Deletes a patient by it's id
+
+	public void addTask(EmerTaskEntity task);
+
+	public List<EmerTaskEntity> getTaskByUserID(int userId);
+
+	public List<EmerTaskEntity> getAllTasks();
+	
+	public EmerTaskEntity getTaskById(int taskId);
+    
     public boolean updateStatus(Integer taskId, String status);
 }

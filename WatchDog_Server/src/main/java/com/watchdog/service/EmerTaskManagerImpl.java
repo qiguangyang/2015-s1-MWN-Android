@@ -36,6 +36,11 @@ public class EmerTaskManagerImpl implements EmerTaskManager {
 	}
 
 	@Override
+	public EmerTaskEntity getTaskById(int taskId) {
+		return emerTaskDAO.getTaskById(taskId);
+	}
+
+	@Override
 	@Transactional
 	public boolean updateTaskStatus(int taskId, String status) {
 		return emerTaskDAO.updateStatus(taskId, status);

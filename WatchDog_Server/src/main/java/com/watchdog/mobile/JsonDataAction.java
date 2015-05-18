@@ -27,6 +27,8 @@ public class JsonDataAction extends ActionSupport implements
 
 	private HttpServletRequest request;  
     private HttpServletResponse response;
+    
+    private int patientId;
 	
 	@Override
 	public void setServletResponse(HttpServletResponse response) {
@@ -42,23 +44,44 @@ public class JsonDataAction extends ActionSupport implements
 		this.patientManager = patientManager;
 	}
 	
+	public void setPatientId(int id) {
+		this.patientId = id;
+	}
+	
 	public void getAllPatients() {
 		JSONArray jsonArray = new JSONArray();
 		List<PatientEntity> pList = patientManager.getAllPatients();
 
-		for (PatientEntity p : pList) {
+		for (PatientEntity pe : pList) {
 
 			JSONObject jsonObject = new JSONObject();
-			jsonObject.put("patientID", p.getId());
-			jsonObject.put("patientName", p.getFirstname() + " " +  p.getLastname());
-			jsonObject.put("contactNum", p.getContact());
-			jsonObject.put("forbiddenArea", p.getForbidden());
+			jsonObject.put("patientID", pe.getId());
+			jsonObject.put("patientName", pe.getFirstname() + " " +  pe.getLastname());
+			jsonObject.put("contactNum", pe.getContact());
+			jsonObject.put("forbiddenArea", pe.getForbidden());
 			jsonArray.add(0, jsonObject);
 		}
 
 		try {
 			this.response.setCharacterEncoding("UTF-8");
 			this.response.getWriter().write(jsonArray.toString());
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+	}
+	
+	public void getPatientById() {
+		PatientEntity pe = patientManager.getPatientById(patientId);
+		
+		JSONObject jo = new JSONObject();
+		jo.put("patientId", pe.getId());
+		jo.put("patientName", pe.getFirstname() + " " +  pe.getLastname());
+		jo.put("contactNum", pe.getContact());
+		jo.put("forbiddenArea", pe.getForbidden());
+		
+		try {
+			this.response.setCharacterEncoding("UTF-8");
+			this.response.getWriter().write(jo.toString());
 		} catch (IOException e) {
 			e.printStackTrace();
 		}

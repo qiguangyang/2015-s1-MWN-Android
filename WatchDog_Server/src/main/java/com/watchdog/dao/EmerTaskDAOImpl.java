@@ -29,6 +29,7 @@ public class EmerTaskDAOImpl implements EmerTaskDAO {
 	public List<EmerTaskEntity> getTaskByUserID(int userId) {
 		StringBuilder hql = new StringBuilder();
 		hql.append("from EmerTaskEntity P where P.relatedCareGiverId = " + userId);
+		hql.append(" order by 'RED', 'YELLOW', 'GREEN'");
 		Query query = this.sessionFactory.getCurrentSession().createQuery(hql.toString());
 		List<EmerTaskEntity> result = query.list();
     	return result;
@@ -37,13 +38,32 @@ public class EmerTaskDAOImpl implements EmerTaskDAO {
 	@SuppressWarnings("unchecked")
 	@Override
 	public List<EmerTaskEntity> getAllTasks() {
-		return this.sessionFactory.getCurrentSession().createQuery("from EmerTaskEntity").list();
+		StringBuilder hql = new StringBuilder();
+		hql.append("from EmerTaskEntity");
+		hql.append(" order by 'RED', 'YELLOW', 'GREEN'");
+		Query query = this.sessionFactory.getCurrentSession().createQuery(hql.toString());
+		return query.list();
+	}
+
+	@SuppressWarnings("unchecked")
+	@Override
+	public EmerTaskEntity getTaskById(int taskId) {
+		StringBuilder hql = new StringBuilder();
+		hql.append("from EmerTaskEntity P where P.id = " + taskId);
+		Query query = this.sessionFactory.getCurrentSession().createQuery(hql.toString());
+		List<EmerTaskEntity> result = query.list();
+		if (result.size() !=0 ) {
+			return result.get(0);
+		} else {
+			return null;
+		}
 	}
 
 	@Override
 	public boolean updateStatus(Integer taskId, String status) {
+		status = status.toUpperCase();
 		String hql = "UPDATE EmerTaskEntity set status = :status, endtime = :endtime " + 
-	             "WHERE id = :taskid";
+	             "WHERE id = :taskid AND status != :status";
 		Query query = this.sessionFactory.getCurrentSession().createQuery(hql);
 		query.setParameter("status", status);
 		query.setParameter("endtime", new Date());

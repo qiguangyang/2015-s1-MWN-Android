@@ -47,6 +47,10 @@
 			method="getAllPatients">
 			<result type="json" />
 		</action>
+		<action name="getPatientById" class="com.watchdog.mobile.JsonDataAction"
+			method="getPatientById">
+			<result type="json" />
+		</action>
 		<action name="getAllTasks" class="com.watchdog.mobile.EmerTaskJsonAction"
 			method="getAllTasks">
 			<result type="json" />

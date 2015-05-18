@@ -69,24 +69,24 @@ public class EmerTaskJsonAction extends ActionSupport implements
 		List<EmerTaskEntity> etList = emerTaskManager.getAllTasks();
 
 		JSONArray jsonArray = getJsonArray(etList);
-		try {
-			this.response.setCharacterEncoding("UTF-8");
-			this.response.getWriter().write(jsonArray.toString());
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
+		returnJsonStr(jsonArray.toString());
 	}
 	
 	public void getRelatedTasks() {
 		List<EmerTaskEntity> etList = emerTaskManager.getRelatedTasks(caregiverId);
 		
 		JSONArray jsonArray = getJsonArray(etList);
-		try {
-			this.response.setCharacterEncoding("UTF-8");
-			this.response.getWriter().write(jsonArray.toString());
-		} catch (IOException e) {
-			e.printStackTrace();
+		returnJsonStr(jsonArray.toString());
+
+	}
+	
+	public void getTaskById() {
+		EmerTaskEntity te = emerTaskManager.getTaskById(taskId);
+		JSONObject jo = null;
+		if (te!=null) {
+			jo = getJsonObject(te);
 		}
+		returnJsonStr(jo.toString());
 	}
 	
 	public void updateTaskStatus() {
@@ -95,25 +95,35 @@ public class EmerTaskJsonAction extends ActionSupport implements
 		JSONObject jo = new JSONObject();
 		jo.put("updateResult", result);
 		
-		try {
-			this.response.setCharacterEncoding("UTF-8");
-			this.response.getWriter().write(jo.toString());
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
+		returnJsonStr(jo.toString());
 	}
 	
 	private JSONArray getJsonArray(List<EmerTaskEntity> etList) {
 		JSONArray jsonArray = new JSONArray();
 		
-		for (EmerTaskEntity et : etList) {
-			PatientEntity pe = patientManager.getPatientById(et.getPatientId());
-			JSONObject jo = new JSONObject();
-			jo.put("patientName",pe.getFirstname() + " " +  pe.getLastname());
-			jo.put("location", et.getLocation());
-			jo.put("status", et.getStatus());
+		for (EmerTaskEntity te : etList) {
+			JSONObject jo = getJsonObject(te);
 			jsonArray.add(0, jo);
 		}
 		return jsonArray;
+	}
+	
+	private JSONObject getJsonObject(EmerTaskEntity te) {
+		PatientEntity pe = patientManager.getPatientById(te.getPatientId());
+		JSONObject jo = new JSONObject();
+		jo.put("taskId", te.getId());
+		jo.put("patientName",pe.getFirstname() + " " +  pe.getLastname());
+		jo.put("location", te.getLocation());
+		jo.put("status", te.getStatus());
+		return jo;
+	}
+	
+	private void returnJsonStr(String str) {
+		try {
+			this.response.setCharacterEncoding("UTF-8");
+			this.response.getWriter().write(str);
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
 	}
 }
