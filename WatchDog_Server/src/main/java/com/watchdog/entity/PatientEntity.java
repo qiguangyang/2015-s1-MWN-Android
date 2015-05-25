@@ -27,8 +27,8 @@ public class PatientEntity {
     @Column(name="FORBIDDEN_AREA")
     private String forbidden;
     
-    @Column(name="TAGID")
-    private String tagId;
+//    @Column(name="TAGID")
+//    private String tagId;
     
     public String getContact() {
         return contact;
@@ -60,10 +60,10 @@ public class PatientEntity {
     public void setId(Integer id) {
         this.id = id;
     }
-	public String getTagId() {
-		return tagId;
-	}
-	public void setTagId(String tagId) {
-		this.tagId = tagId;
-	}
+//	public String getTagId() {
+//		return tagId;
+//	}
+//	public void setTagId(String tagId) {
+//		this.tagId = tagId;
+//	}
 }
