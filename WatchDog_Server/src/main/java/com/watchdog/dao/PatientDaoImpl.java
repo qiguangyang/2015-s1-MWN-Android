@@ -58,4 +58,15 @@ public class PatientDaoImpl implements PatientDAO
         	this.sessionFactory.getCurrentSession().delete(patient);
         }
 	}
+
+	@Override
+	public PatientEntity getPatientByTagId(String tagId) {
+		StringBuilder hql = new StringBuilder();
+		hql.append("from PatientEntity P where P.tagId = " + tagId);
+		Query query = this.sessionFactory.getCurrentSession().createQuery(hql.toString());
+		PatientEntity result = (PatientEntity) query.list().get(0);
+    	return result;
+	}
+	
+	
 }

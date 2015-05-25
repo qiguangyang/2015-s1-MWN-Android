@@ -7,5 +7,7 @@
     <session-factory>
         <mapping class="com.watchdog.entity.PatientEntity" />
         <mapping class="com.watchdog.entity.EmerTaskEntity" />
+        <mapping class="com.watchdog.entity.ReaderEntity" />
+        <mapping class="com.watchdog.entity.LocationEntity" />
     </session-factory>
 </hibernate-configuration>

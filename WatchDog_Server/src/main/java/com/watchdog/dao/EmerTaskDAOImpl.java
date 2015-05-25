@@ -29,7 +29,7 @@ public class EmerTaskDAOImpl implements EmerTaskDAO {
 	public List<EmerTaskEntity> getTaskByUserID(int userId) {
 		StringBuilder hql = new StringBuilder();
 		hql.append("from EmerTaskEntity P where P.relatedCareGiverId = " + userId);
-		hql.append(" order by 'RED', 'YELLOW', 'GREEN'");
+		hql.append(" order by case tatus when 'RED' then 1 when 'YELLOW' then 2 when 'GREEN' then 3 end");
 		Query query = this.sessionFactory.getCurrentSession().createQuery(hql.toString());
 		List<EmerTaskEntity> result = query.list();
     	return result;

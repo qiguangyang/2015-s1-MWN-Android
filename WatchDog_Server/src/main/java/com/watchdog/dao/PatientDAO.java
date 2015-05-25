@@ -16,4 +16,6 @@ public interface PatientDAO
     public List<PatientEntity> getAllPatients();
     //Deletes a patient by it's id
     public void deletePatient(Integer patientId);
+    //Get patient by EPC tag id
+    public PatientEntity getPatientByTagId(String tagId);
 }
