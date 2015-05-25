@@ -25,6 +25,7 @@ target/
 local.properties
 workspace.xml
 app.iml
+jdbc.properties
 
 # build #
 ######################
