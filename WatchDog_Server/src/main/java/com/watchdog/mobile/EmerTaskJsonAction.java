@@ -1,6 +1,7 @@
 package com.watchdog.mobile;
 
 import java.io.IOException;
+import java.text.DateFormat;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -80,6 +81,10 @@ public class EmerTaskJsonAction extends ActionSupport implements
 
 	}
 	
+	public void getTaskByStatus(String status) {
+		
+	}
+	
 	public void getTaskById() {
 		EmerTaskEntity te = emerTaskManager.getTaskById(taskId);
 		JSONObject jo = null;
@@ -87,6 +92,12 @@ public class EmerTaskJsonAction extends ActionSupport implements
 			jo = getJsonObject(te);
 		}
 		returnJsonStr(jo.toString());
+	}
+	
+	public void getTaskByStatus() {
+		List<EmerTaskEntity> etList = emerTaskManager.getTaskByStatus(status);
+		JSONArray jsonArray = getJsonArray(etList);
+		returnJsonStr(jsonArray.toString());
 	}
 	
 	public void updateTaskStatus() {
@@ -115,6 +126,8 @@ public class EmerTaskJsonAction extends ActionSupport implements
 		jo.put("patientName",pe.getFirstname() + " " +  pe.getLastname());
 		jo.put("location", te.getLocation());
 		jo.put("status", te.getStatus());
+		jo.put("startTime", te.getStarttime().toString());
+		jo.put("relatedCgId", te.getRelatedCareGiverId());
 		return jo;
 	}
 	

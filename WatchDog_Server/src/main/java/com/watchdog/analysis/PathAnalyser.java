@@ -1,5 +1,17 @@
 package com.watchdog.analysis;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+
+import org.apache.http.HttpResponse;
+import org.apache.http.NameValuePair;
+import org.apache.http.client.HttpClient;
+import org.apache.http.client.entity.UrlEncodedFormEntity;
+import org.apache.http.client.methods.HttpPost;
+import org.apache.http.impl.client.HttpClientBuilder;
+import org.apache.http.message.BasicNameValuePair;
+
 import com.watchdog.dao.LocationDAO;
 import com.watchdog.dao.ReaderDAO;
 import com.watchdog.entity.EmerTaskEntity;
@@ -16,7 +28,7 @@ public class PathAnalyser {
 	private ReaderDAO readerDao;
 	private LocationDAO locationDao;
 	
-	private String url = ""; // XMPP notification URL
+	private String XmppURL = ""; // XMPP notification URL
 	
 	public void setEmerTaskManager(EmerTaskManager emerTaskManager) {
 		this.emerTaskManager = emerTaskManager;
@@ -31,33 +43,47 @@ public class PathAnalyser {
 		ReaderEntity r = readerDao.getReaderByIp(path.getReader());
 		if (pe != null ) {
 			String loc = pe.getForbidden();
-			String des = "";
+			List<String> locList = Arrays.asList(loc.split(";"));
+			
+			int des = 0;
 			if (path.getDirection() == 1) {
 				int o = path.getOrientation();
 				switch (o) {
 				case 0:
-					des = locationDao.getLocationById(r.getLeft()).getName();
+					des = r.getLeft();
 				case 1:
-					des = locationDao.getLocationById(r.getCenter()).getName();
+					des = r.getCenter();
 				case 2:
-					des = locationDao.getLocationById(r.getRight()).getName();
+					des = r.getRight();
 				}
 
-				if (loc.contains(des)) {
+				if (locList.contains(String.valueOf(des))) {
 					EmerTaskEntity et = new EmerTaskEntity();
 					et.setPatientId(pe.getId());
 					et.setStatus("RED");
-					et.setLocation(des);
-					et.setRelatedCareGiverId(1); //TODO cgID
+					et.setLocation(locationDao.getLocationById(des).getName());
+					et.setRelatedCareGiverId(et.getRelatedCareGiverId());
 					emerTaskManager.addTask(et);
-					notifyDevice();
+					notifyDevice(XmppURL);
 				}
 			}
 		}
 		return false;
 	}
 	
-	private void notifyDevice() {
+	private void notifyDevice(String url) {
+		HttpClient client = HttpClientBuilder.create().build();
+		HttpPost post = new HttpPost(url);
+ 
+		List<NameValuePair> urlParameters = new ArrayList<NameValuePair>();
+		urlParameters.add(new BasicNameValuePair("locale", ""));
+ 
+		try {
+			post.setEntity(new UrlEncodedFormEntity(urlParameters));
+			HttpResponse response = client.execute(post);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 		
 	}
 	

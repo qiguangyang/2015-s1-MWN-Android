@@ -42,8 +42,23 @@ public class EmerTaskManagerImpl implements EmerTaskManager {
 
 	@Override
 	@Transactional
-	public boolean updateTaskStatus(int taskId, String status) {
-		return emerTaskDAO.updateStatus(taskId, status);
+	public boolean updateTaskStatus(int taskId, String status) {	
+		try {
+			int result = emerTaskDAO.updateStatus(taskId, status);
+			if (result == 1) {
+				return true;
+			} else {
+				return false;
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+			return false;
+		}
+	}
+
+	@Override
+	public List<EmerTaskEntity> getTaskByStatus(String status) {
+		return emerTaskDAO.getTaskByStatus(status);
 	}
 
 }

@@ -14,5 +14,7 @@ public interface EmerTaskDAO {
 	
 	public EmerTaskEntity getTaskById(int taskId);
     
-    public boolean updateStatus(Integer taskId, String status);
+    public int updateStatus(Integer taskId, String status);
+    
+    public List<EmerTaskEntity> getTaskByStatus(String status);
 }

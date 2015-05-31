@@ -42,7 +42,8 @@ public class EmerTaskDAOImpl implements EmerTaskDAO {
 		hql.append("from EmerTaskEntity");
 		hql.append(" order by case status when 'RED' then 1 when 'YELLOW' then 2 when 'GREEN' then 3 end");
 		Query query = this.sessionFactory.getCurrentSession().createQuery(hql.toString());
-		return query.list();
+		List<EmerTaskEntity> result = query.list();
+		return result;
 	}
 
 	@SuppressWarnings("unchecked")
@@ -60,7 +61,7 @@ public class EmerTaskDAOImpl implements EmerTaskDAO {
 	}
 
 	@Override
-	public boolean updateStatus(Integer taskId, String status) {
+	public int updateStatus(Integer taskId, String status) {
 		status = status.toUpperCase();
 		String hql = "UPDATE EmerTaskEntity set status = :status, endtime = :endtime " + 
 	             "WHERE id = :taskid AND status != :status";
@@ -68,16 +69,17 @@ public class EmerTaskDAOImpl implements EmerTaskDAO {
 		query.setParameter("status", status);
 		query.setParameter("endtime", new Date());
 		query.setParameter("taskid", taskId);
-		try {
-			int result = query.executeUpdate();
-			if (result == 1) {
-				return true;
-			} else {
-				return false;
-			}
-		} catch (Exception e) {
-			e.printStackTrace();
-			return false;
-		}
+		int result = query.executeUpdate();
+		return result;
+	}
+
+	@SuppressWarnings("unchecked")
+	@Override
+	public List<EmerTaskEntity> getTaskByStatus(String status) {
+		StringBuilder hql = new StringBuilder();
+		hql.append("from EmerTaskEntity P where P.status = " + status);
+		Query query = this.sessionFactory.getCurrentSession().createQuery(hql.toString());
+		List<EmerTaskEntity> result = query.list();
+		return result;
 	}
 }

@@ -59,6 +59,14 @@
 			method="getRelatedTasks">
 			<result type="json" />
 		</action>
+		<action name="getTaskByStatus" class="com.watchdog.mobile.EmerTaskJsonAction"
+			method="getTaskByStatus">
+			<result type="json" />
+		</action>
+		<action name="getTaskById" class="com.watchdog.mobile.EmerTaskJsonAction"
+			method="getTaskById">
+			<result type="json" />
+		</action>
 		<action name="updateTaskStatus" class="com.watchdog.mobile.EmerTaskJsonAction"
 			method="updateTaskStatus">
 			<result type="json" />

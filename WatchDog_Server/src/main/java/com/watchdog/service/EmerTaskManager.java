@@ -15,4 +15,6 @@ public interface EmerTaskManager {
     public EmerTaskEntity getTaskById(int taskId);
     
     public boolean updateTaskStatus(int taskId, String status);
+    
+    public List<EmerTaskEntity> getTaskByStatus(String status);
 }
