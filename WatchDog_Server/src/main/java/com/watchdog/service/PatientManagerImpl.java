@@ -10,29 +10,29 @@ import com.watchdog.entity.PatientEntity;
 public class PatientManagerImpl implements PatientManager {
 
 	private PatientDAO patientDAO;
-    
-  	public void setPatientDAO(PatientDAO patientDAO) {
-  		this.patientDAO = patientDAO;
-  	}
-	
+
+	public void setPatientDAO(PatientDAO patientDAO) {
+		this.patientDAO = patientDAO;
+	}
+
 	@Override
 	@Transactional
 	public void addPatient(PatientEntity patient) {
 		patientDAO.addPatient(patient);
 	}
-	
+
 	@Override
 	@Transactional
 	public List<PatientEntity> getAllPatients() {
 		return patientDAO.getAllPatients();
 	}
-	
-		@Override
-		@Transactional
-    public PatientEntity getPatientById(Integer patientId) {
-    	return patientDAO.getPatientById(patientId);
-    }
-	
+
+	@Override
+	@Transactional
+	public PatientEntity getPatientById(Integer patientId) {
+		return patientDAO.getPatientById(patientId);
+	}
+
 	@Override
 	@Transactional
 	public void deletePatient(Integer patientId) {

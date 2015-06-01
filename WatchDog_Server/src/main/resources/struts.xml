@@ -71,6 +71,14 @@
 			method="updateTaskStatus">
 			<result type="json" />
 		</action>
+		<action name="mobileLogin" class="com.watchdog.mobile.AuthenticationAction"
+			method="login">
+			<result type="json" />
+		</action>
+		<action name="mobileLogout" class="com.watchdog.mobile.AuthenticationAction"
+			method="logout">
+			<result type="json" />
+		</action>
 	</package>
 
 </struts>

@@ -76,8 +76,12 @@ public class PathAnalyser {
 		HttpPost post = new HttpPost(url);
  
 		List<NameValuePair> urlParameters = new ArrayList<NameValuePair>();
-		urlParameters.add(new BasicNameValuePair("locale", ""));
- 
+		urlParameters.add(new BasicNameValuePair("action", "send"));
+		urlParameters.add(new BasicNameValuePair("appKey", ""));
+		urlParameters.add(new BasicNameValuePair("title", ""));
+		urlParameters.add(new BasicNameValuePair("message", ""));
+		urlParameters.add(new BasicNameValuePair("uri", ""));
+
 		try {
 			post.setEntity(new UrlEncodedFormEntity(urlParameters));
 			HttpResponse response = client.execute(post);

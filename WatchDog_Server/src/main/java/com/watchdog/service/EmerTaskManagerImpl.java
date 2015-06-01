@@ -36,6 +36,7 @@ public class EmerTaskManagerImpl implements EmerTaskManager {
 	}
 
 	@Override
+	@Transactional
 	public EmerTaskEntity getTaskById(int taskId) {
 		return emerTaskDAO.getTaskById(taskId);
 	}
@@ -57,6 +58,7 @@ public class EmerTaskManagerImpl implements EmerTaskManager {
 	}
 
 	@Override
+	@Transactional
 	public List<EmerTaskEntity> getTaskByStatus(String status) {
 		return emerTaskDAO.getTaskByStatus(status);
 	}

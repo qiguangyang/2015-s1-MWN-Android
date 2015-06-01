@@ -42,6 +42,14 @@
         <property name="emerTaskDAO" ref="emerTaskDAO"/>
     </bean>
     
+    <bean id="caregiverDAO" class="com.watchdog.dao.CaregiverDAOImpl">
+        <property name="sessionFactory" ref="sessionFactory"/>
+    </bean>
+    
+    <bean id="caregiverManager" class="com.watchdog.service.CaregiverManagerImpl">
+        <property name="caregiverDAO" ref="caregiverDAO"/>
+    </bean>
+    
     <!-- Configure jdbc.properties -->
     <bean id="propertyConfigurer"
         class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer"
