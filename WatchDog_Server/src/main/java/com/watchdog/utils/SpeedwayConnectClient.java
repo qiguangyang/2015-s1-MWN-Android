@@ -25,7 +25,6 @@ public class SpeedwayConnectClient {
             while (true)
             {
                 // Read one line at a time
-//                String line = br.readLine();
                 String line = dis.readUTF();
 
                 // Print it to the screen
