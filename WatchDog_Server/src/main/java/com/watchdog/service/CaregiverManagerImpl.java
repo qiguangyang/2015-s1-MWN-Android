@@ -12,7 +12,7 @@ import com.watchdog.entity.CaregiverEntity;
 public class CaregiverManagerImpl implements CaregiverManager {
 
 	private CaregiverDAO caregiverDAO;
-    
+
 	public void setCaregiverDAO(CaregiverDAO cgDAO) {
 		this.caregiverDAO = cgDAO;
 	}
@@ -29,13 +29,23 @@ public class CaregiverManagerImpl implements CaregiverManager {
 			map.put("userid", cg.getId().toString());
 			return map;
 		}
-	    
+
 		return null;
 	}
 
 	@Override
 	@Transactional
 	public Integer getUserIdByName(String name) {
+		return null;
+	}
+
+	@Override
+	@Transactional
+	public String getAppKeyById(int id) {
+		CaregiverEntity cg = caregiverDAO.getCaregiverById(id);
+		if (cg != null) {
+			return cg.getAppKey();
+		}
 		return null;
 	}
 

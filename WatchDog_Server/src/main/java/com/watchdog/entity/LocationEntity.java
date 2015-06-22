@@ -15,10 +15,10 @@ public class LocationEntity {
     @GeneratedValue
     private Integer id;
      
-    @Column(name="NAME")
+    @Column(name="L_NAME")
     private String name;
  
-    @Column(name="LEVEL")
+    @Column(name="L_LEVEL")
     private String level;
 
 	public Integer getId() {

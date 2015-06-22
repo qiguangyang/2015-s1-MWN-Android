@@ -6,4 +6,6 @@ import com.watchdog.entity.CaregiverEntity;
 
 public interface CaregiverDAO {
 	public List<CaregiverEntity> getAuthInfo(String name);
+	
+	public CaregiverEntity getCaregiverById(int id);
 }

@@ -26,4 +26,21 @@ public class CaregiverDAOImpl implements CaregiverDAO {
 		List<CaregiverEntity> result = query.list();
     	return result;
 	}
+
+	@SuppressWarnings("unchecked")
+	@Override
+	public CaregiverEntity getCaregiverById(int id) {
+		StringBuilder hql = new StringBuilder();
+		hql.append("from CaregiverEntity where id = :id");
+		Query query = this.sessionFactory.getCurrentSession().createQuery(hql.toString());
+		query.setParameter("id", id);
+		List<CaregiverEntity> result = query.list();
+		if (result.isEmpty()) {
+			return null;
+		} else {
+			return result.get(0);
+		}
+	}
+	
+	
 }

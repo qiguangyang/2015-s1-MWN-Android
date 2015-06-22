@@ -25,6 +25,9 @@ public class CaregiverEntity {
      
     @Column(name="CG_PWD")
     private String password;
+    
+    @Column(name="APP_KEY")
+    private String appKey;
 
 	public Integer getId() {
 		return id;
@@ -64,6 +67,14 @@ public class CaregiverEntity {
 
 	public void setPassword(String password) {
 		this.password = password;
+	}
+
+	public String getAppKey() {
+		return appKey;
+	}
+
+	public void setAppKey(String appKey) {
+		this.appKey = appKey;
 	}
     
     

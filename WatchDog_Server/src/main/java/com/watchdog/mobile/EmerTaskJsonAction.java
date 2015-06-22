@@ -125,6 +125,7 @@ public class EmerTaskJsonAction extends ActionSupport implements
 		jo.put("taskId", te.getId());
 		jo.put("patientName",pe.getFirstname() + " " +  pe.getLastname());
 		jo.put("location", te.getLocation());
+		jo.put("destination", te.getDestination());
 		jo.put("status", te.getStatus());
 		jo.put("startTime", te.getStarttime().toString());
 		jo.put("relatedCgId", te.getRelatedCareGiverId());

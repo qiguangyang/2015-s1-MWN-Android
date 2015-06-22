@@ -18,6 +18,9 @@ public class EmerTaskEntity {
      
     @Column(name="LOCATION")
     private String location;
+    
+    @Column(name="DESTINATION")
+    private String destination;
  
     @Column(name="PATIENT_ID")
     private int patientId;
@@ -48,6 +51,14 @@ public class EmerTaskEntity {
 
 	public void setLocation(String location) {
 		this.location = location;
+	}
+
+	public String getDestination() {
+		return destination;
+	}
+
+	public void setDestination(String destination) {
+		this.destination = destination;
 	}
 
 	public int getPatientId() {

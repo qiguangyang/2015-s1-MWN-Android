@@ -31,7 +31,7 @@ public class PatientEntity {
     private String tagId;
     
     @Column(name="RELATED_CG_ID")
-    private String cgId;
+    private int cgId;
     
     public String getContact() {
         return contact;
@@ -69,10 +69,10 @@ public class PatientEntity {
 	public void setTagId(String tagId) {
 		this.tagId = tagId;
 	}
-	public String getCgId() {
+	public int getCgId() {
 		return cgId;
 	}
-	public void setCgId(String cgId) {
+	public void setCgId(int cgId) {
 		this.cgId = cgId;
 	}
 }

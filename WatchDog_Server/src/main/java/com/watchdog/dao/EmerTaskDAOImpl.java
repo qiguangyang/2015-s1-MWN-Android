@@ -29,7 +29,7 @@ public class EmerTaskDAOImpl implements EmerTaskDAO {
 	public List<EmerTaskEntity> getTaskByUserID(int userId) {
 		StringBuilder hql = new StringBuilder();
 		hql.append("from EmerTaskEntity P where P.relatedCareGiverId = " + userId);
-		hql.append(" order by case status when 'RED' then 1 when 'YELLOW' then 2 when 'GREEN' then 3 end");
+		hql.append(" order by case status when 'RED' then 3 when 'YELLOW' then 2 when 'GREEN' then 1 end");
 		Query query = this.sessionFactory.getCurrentSession().createQuery(hql.toString());
 		List<EmerTaskEntity> result = query.list();
     	return result;
@@ -40,7 +40,7 @@ public class EmerTaskDAOImpl implements EmerTaskDAO {
 	public List<EmerTaskEntity> getAllTasks() {
 		StringBuilder hql = new StringBuilder();
 		hql.append("from EmerTaskEntity");
-		hql.append(" order by case status when 'RED' then 1 when 'YELLOW' then 2 when 'GREEN' then 3 end");
+		hql.append(" order by case status when 'RED' then 3 when 'YELLOW' then 2 when 'GREEN' then 1 end");
 		Query query = this.sessionFactory.getCurrentSession().createQuery(hql.toString());
 		List<EmerTaskEntity> result = query.list();
 		return result;

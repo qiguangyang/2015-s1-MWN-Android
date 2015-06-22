@@ -7,7 +7,7 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 
 @Entity
-@Table(name="READER")
+@Table(name="READER_LOCATION")
 public class ReaderEntity {
 
 	@Id
@@ -33,6 +33,9 @@ public class ReaderEntity {
     @Column(name="READER_LEVEL")
 	private int level;
 
+    @Column(name="LOCATION_ID")
+	private int location;
+    
 	public int getId() {
 		return id;
 	}
@@ -87,6 +90,14 @@ public class ReaderEntity {
 
 	public void setLevel(int level) {
 		this.level = level;
+	}
+
+	public int getLocation() {
+		return location;
+	}
+
+	public void setLocation(int location) {
+		this.location = location;
 	}
     
 }
