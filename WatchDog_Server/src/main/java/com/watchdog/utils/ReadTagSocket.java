@@ -80,6 +80,7 @@ public class ReadTagSocket implements TagReportListener, Runnable {
 			reader.stop();
 			reader.disconnect();
 			s.close();
+			System.out.println("Disconnected.");
 		} catch (OctaneSdkException ex) {
 			System.out.println(ex.getMessage());
 		} catch (Exception ex) {
@@ -128,6 +129,7 @@ public class ReadTagSocket implements TagReportListener, Runnable {
 				dos.writeUTF(s);
 			}
 		} catch (Exception e) {
+			System.out.println("e");
 			e.printStackTrace();
 		}
 

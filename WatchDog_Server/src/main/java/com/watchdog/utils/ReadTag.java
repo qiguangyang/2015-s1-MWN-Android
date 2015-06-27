@@ -3,7 +3,6 @@ package com.watchdog.utils;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
 import java.util.Scanner;
@@ -24,12 +23,6 @@ import com.impinj.octanesdk.TagReportListener;
 public class ReadTag implements TagReportListener {
 
 	private ImpinjReader reader;
-
-	public List<TestTag> tts;
-
-	public ReadTag() {
-		this.tts = new ArrayList<TestTag>();
-	}
 
 	public void run() {
 		try {

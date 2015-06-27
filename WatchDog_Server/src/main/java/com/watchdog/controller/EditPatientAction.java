@@ -80,16 +80,14 @@ public class EditPatientAction extends ActionSupport implements Preparable {
 		return SUCCESS;
 	}
 	
-	public String analyse() {
+	public void analyse() {
 		PathRecordEntity path = new PathRecordEntity();
 		path.setTagId(tagId);
 		path.setReader(reader);
 		path.setDirection(Integer.valueOf(direction));
 		path.setOrientation(Integer.valueOf(orientation));
 		
-		pathAnalyser.evaluate(path);
-		
-		return SUCCESS;
+		pathAnalyser.evaluate(path);		
 	}
 
 	// This method will be called before any of Action method is invoked;
